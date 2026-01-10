@@ -27,6 +27,27 @@ return {
         use_libuv_file_watcher = true,
       })
 
+      -- シングルクリックでファイルを開く設定
+      opts.event_handlers = opts.event_handlers or {}
+      table.insert(opts.event_handlers, {
+        event = "file_open_requested",
+        handler = function()
+          require("neo-tree.command").execute({ action = "close" })
+        end,
+      })
+
+      -- ウィンドウ設定：シングルクリックでファイルを開く
+      opts.window = vim.tbl_deep_extend("force", opts.window or {}, {
+        mappings = {
+          ["<cr>"] = "open",
+          ["<2-LeftMouse>"] = "open",
+          ["<LeftRelease>"] = {
+            "open",
+            nowait = true,
+          },
+        },
+      })
+
       -- git_statusソースの設定
       opts.source_selector = {
         winbar = true,
