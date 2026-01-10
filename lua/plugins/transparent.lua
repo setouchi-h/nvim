@@ -5,7 +5,7 @@ return {
     opts = { transparent = true },
   },
 
-  -- 透明化の取りこぼしを潰す
+  -- 透明化の取りこぼしを潰す（NeoTreeはautocmds.luaで設定）
   {
     "LazyVim/LazyVim",
     opts = function()

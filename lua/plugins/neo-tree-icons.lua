@@ -5,9 +5,9 @@ return {
       opts.default_component_configs = opts.default_component_configs or {}
 
       opts.default_component_configs.icon = vim.tbl_deep_extend("force", opts.default_component_configs.icon or {}, {
-        folder_closed = "",
-        folder_open = "",
-        folder_empty = "",
+        folder_closed = "󰉋",
+        folder_open = "󰝰",
+        folder_empty = "󰉖",
         default = "󰈙",
       })
 
@@ -18,8 +18,8 @@ return {
           with_markers = true,
           indent_marker = "│",
           last_indent_marker = "└",
-          expander_collapsed = "",
-          expander_expanded = "",
+          expander_collapsed = "",
+          expander_expanded = "",
         })
 
       return opts
