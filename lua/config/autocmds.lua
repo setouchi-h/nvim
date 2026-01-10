@@ -29,3 +29,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 set_neotree_hl()
+
+-- FocusGained時にneo-treeを更新（外部でgit操作した場合）
+vim.api.nvim_create_autocmd("FocusGained", {
+  callback = function()
+    if package.loaded["neo-tree"] then
+      require("neo-tree.sources.manager").refresh("filesystem")
+    end
+  end,
+})

@@ -22,6 +22,11 @@ return {
           expander_expanded = "",
         })
 
+      -- gitステータスの自動更新を有効化
+      opts.filesystem = vim.tbl_deep_extend("force", opts.filesystem or {}, {
+        use_libuv_file_watcher = true,
+      })
+
       return opts
     end,
   },
