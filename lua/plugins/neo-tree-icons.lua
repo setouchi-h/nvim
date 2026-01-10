@@ -27,7 +27,19 @@ return {
         use_libuv_file_watcher = true,
       })
 
+      -- git_statusソースの設定
+      opts.source_selector = {
+        winbar = true,
+        sources = {
+          { source = "filesystem", display_name = " 󰉓 Files " },
+          { source = "git_status", display_name = " 󰊢 Git " },
+        },
+      }
+
       return opts
     end,
+    keys = {
+      { "<leader>gs", "<cmd>Neotree git_status<cr>", desc = "Git status (Neo-tree)" },
+    },
   },
 }
