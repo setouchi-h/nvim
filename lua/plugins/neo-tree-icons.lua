@@ -27,15 +27,6 @@ return {
         use_libuv_file_watcher = true,
       })
 
-      -- シングルクリックでファイルを開く設定
-      opts.event_handlers = opts.event_handlers or {}
-      table.insert(opts.event_handlers, {
-        event = "file_open_requested",
-        handler = function()
-          require("neo-tree.command").execute({ action = "close" })
-        end,
-      })
-
       -- ウィンドウ設定：シングルクリックでファイルを開く
       opts.window = vim.tbl_deep_extend("force", opts.window or {}, {
         mappings = {
@@ -56,6 +47,36 @@ return {
           { source = "git_status", display_name = " 󰊢 Git " },
         },
       }
+
+      -- git_statusでファイルをdiffviewで開く
+      opts.git_status = vim.tbl_deep_extend("force", opts.git_status or {}, {
+        window = {
+          mappings = {
+            ["<cr>"] = function(state)
+              local node = state.tree:get_node()
+              local path = node.path or node:get_id()
+              if path and vim.fn.filereadable(path) == 1 then
+                vim.cmd("DiffviewOpen -- " .. vim.fn.fnameescape(path))
+              end
+            end,
+            ["<2-LeftMouse>"] = function(state)
+              local node = state.tree:get_node()
+              local path = node.path or node:get_id()
+              if path and vim.fn.filereadable(path) == 1 then
+                vim.cmd("DiffviewOpen -- " .. vim.fn.fnameescape(path))
+              end
+            end,
+            ["<LeftRelease>"] = function(state)
+              local node = state.tree:get_node()
+              local path = node.path or node:get_id()
+              if path and vim.fn.filereadable(path) == 1 then
+                vim.cmd("DiffviewOpen -- " .. vim.fn.fnameescape(path))
+              end
+            end,
+            ["o"] = "open", -- 通常のopenも残す
+          },
+        },
+      })
 
       return opts
     end,
