@@ -56,6 +56,10 @@ return {
       keymap("n", "<leader>xq", "<cmd>Telescope quickfix<cr>", { desc = "Quickfix List" })
       keymap("n", "<leader>xx", "<cmd>XcodebuildPicker<cr>", { desc = "Xcodebuild Commands" })
       keymap("n", "<leader>xo", "<cmd>XcodebuildToggleConsole<cr>", { desc = "Toggle Console (print)" })
+      keymap("n", "<leader>xE", "<cmd>XcodebuildTestExplorerShow<cr>", { desc = "Test Explorer" })
+      keymap("n", "<leader>xR", function()
+        require("xcodebuild.tests.runner").reload_tests()
+      end, { desc = "Reload Tests" })
     end,
   },
 }
