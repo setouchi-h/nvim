@@ -28,4 +28,21 @@ return {
       end
     end,
   },
+
+  -- Swiftフォーマッタ (swift-format)
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        swift = { "swift_format" },
+      },
+      formatters = {
+        swift_format = {
+          command = "xcrun",
+          args = { "swift-format", "--in-place", "$FILENAME" },
+          stdin = false,
+        },
+      },
+    },
+  },
 }
