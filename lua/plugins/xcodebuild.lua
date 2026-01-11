@@ -12,9 +12,13 @@ return {
     require("xcodebuild").setup({
       -- ログパネルの設定
       logs = {
-        auto_open_on_success_build = true,
+        auto_open_on_success_build = false,
         auto_open_on_failed_build = true,
         auto_focus = false,
+      },
+      -- コンソール出力（print文）
+      console = {
+        enabled = true,
       },
       -- コードカバレッジ
       code_coverage = {
@@ -24,6 +28,7 @@ return {
 
     -- キーマップ
     local keymap = vim.keymap.set
+    keymap("n", "<leader>xS", "<cmd>XcodebuildSetup<cr>", { desc = "Setup Project" })
     keymap("n", "<leader>xb", "<cmd>XcodebuildBuild<cr>", { desc = "Build" })
     keymap("n", "<leader>xB", "<cmd>XcodebuildBuildForTesting<cr>", { desc = "Build for Testing" })
     keymap("n", "<leader>xr", "<cmd>XcodebuildBuildRun<cr>", { desc = "Build & Run" })
@@ -31,6 +36,7 @@ return {
     keymap("n", "<leader>xT", "<cmd>XcodebuildTestClass<cr>", { desc = "Run Test Class" })
     keymap("n", "<leader>x.", "<cmd>XcodebuildTestRepeat<cr>", { desc = "Repeat Last Test" })
     keymap("n", "<leader>xl", "<cmd>XcodebuildToggleLogs<cr>", { desc = "Toggle Logs" })
+    keymap("n", "<leader>xo", "<cmd>XcodebuildToggleConsole<cr>", { desc = "Toggle Console (print)" })
     keymap("n", "<leader>xd", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
     keymap("n", "<leader>xp", "<cmd>XcodebuildSelectTestPlan<cr>", { desc = "Select Test Plan" })
     keymap("n", "<leader>xs", "<cmd>XcodebuildSelectScheme<cr>", { desc = "Select Scheme" })
