@@ -23,8 +23,22 @@ return {
         })
 
       -- gitステータスの自動更新を有効化
+      -- VSCode風の表示ルール: .gitは非表示、.vscodeは表示
       opts.filesystem = vim.tbl_deep_extend("force", opts.filesystem or {}, {
         use_libuv_file_watcher = true,
+        filtered_items = {
+          visible = false, -- 非表示アイテムを隠す（trueで薄く表示）
+          hide_dotfiles = false, -- ドットファイルは基本表示
+          hide_gitignored = false, -- VSCode同様、.gitignore対象も表示
+          hide_by_name = {
+            ".git",
+            ".DS_Store",
+            "thumbs.db",
+          },
+          never_show = {
+            ".git",
+          },
+        },
       })
 
       -- ウィンドウ設定：シングルクリックでファイルを開く
