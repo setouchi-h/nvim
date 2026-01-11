@@ -12,7 +12,7 @@ return {
     require("xcodebuild").setup({
       -- ログパネルの設定
       logs = {
-        auto_open_on_success_build = false,
+        auto_open_on_success_build = true,
         auto_open_on_failed_build = true,
         auto_focus = false,
       },
