@@ -39,3 +39,22 @@ vim.api.nvim_create_autocmd("FocusGained", {
     end
   end,
 })
+
+-- Diffモードでマウススクロール時にscrollbindを同期
+vim.api.nvim_create_autocmd("WinScrolled", {
+  group = vim.api.nvim_create_augroup("SyncDiffScroll", { clear = true }),
+  callback = function()
+    -- v:eventからスクロールされたウィンドウを取得
+    for win_str, info in pairs(vim.v.event) do
+      local win = tonumber(win_str)
+      if win and type(info) == "table" and (info.topline ~= 0 or info.topfill ~= 0) then
+        if vim.api.nvim_win_is_valid(win) and vim.wo[win].diff then
+          vim.schedule(function()
+            pcall(vim.cmd.syncbind)
+          end)
+          return
+        end
+      end
+    end
+  end,
+})
