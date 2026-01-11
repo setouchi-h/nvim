@@ -9,14 +9,15 @@
 
 -- Neo-tree customization
 local function set_neotree_hl()
-  vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { fg = "#E5A84B" })
-  vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#E5A84B" })
+  vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { fg = "#ffff00" })
+  vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#ffff00" })
   vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "NONE", ctermbg = "NONE" })
   vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "NONE", ctermbg = "NONE" })
   vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
   vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { bg = "NONE", ctermbg = "NONE" })
   vim.api.nvim_set_hl(0, "NeoTreeIndentMarker", { fg = "#6B7280" })
   vim.api.nvim_set_hl(0, "NeoTreeExpander", { fg = "#6B7280" })
+  vim.api.nvim_set_hl(0, "NeoTreeGitModified", { fg = "#adff2f" })
 end
 
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
