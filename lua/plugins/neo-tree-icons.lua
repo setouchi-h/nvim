@@ -75,6 +75,18 @@ return {
               local git_root = git_utils.get_root_from_path(dir .. "/dummy")
 
               vim.cmd("Neotree close")
+
+              -- Diffview が閉じられたら Neo-tree を再度開く
+              local group = vim.api.nvim_create_augroup("NeoTreeDiffviewReopen", { clear = true })
+              vim.api.nvim_create_autocmd("User", {
+                group = group,
+                pattern = "DiffviewViewClosed",
+                once = true,
+                callback = function()
+                  vim.cmd("Neotree show")
+                end,
+              })
+
               if git_root then
                 vim.cmd("DiffviewOpen -C=" .. vim.fn.fnameescape(git_root))
               else
