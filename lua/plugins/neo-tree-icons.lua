@@ -49,6 +49,37 @@ return {
             "open",
             nowait = true,
           },
+          ["<RightMouse>"] = function(state)
+            local node = state.tree:get_node()
+            local items = {
+              { label = "󰙴  Add File", action = "add" },
+              { label = "󰉗  Add Directory", action = "add_directory" },
+              { label = "  Rename", action = "rename" },
+              { label = "󰆐  Copy", action = "copy_to_clipboard" },
+              { label = "󰆑  Cut", action = "cut_to_clipboard" },
+              { label = "󰆒  Paste", action = "paste_from_clipboard" },
+              { label = "󰩹  Delete", action = "delete" },
+            }
+
+            local labels = {}
+            for _, item in ipairs(items) do
+              table.insert(labels, item.label)
+            end
+
+            vim.ui.select(labels, { prompt = "Actions:" }, function(choice)
+              if choice then
+                for _, item in ipairs(items) do
+                  if item.label == choice then
+                    local commands = require("neo-tree.sources.filesystem.commands")
+                    if commands[item.action] then
+                      commands[item.action](state)
+                    end
+                    break
+                  end
+                end
+              end
+            end)
+          end,
         },
       })
 
