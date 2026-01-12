@@ -11,6 +11,7 @@
 local function set_neotree_hl()
   vim.api.nvim_set_hl(0, "NeoTreeDirectoryIcon", { fg = "#ffff00" })
   vim.api.nvim_set_hl(0, "NeoTreeDirectoryName", { fg = "#ffff00" })
+  vim.api.nvim_set_hl(0, "NeoTreeFileName", { fg = "#e0e0e0" })
   vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "NONE", ctermbg = "NONE" })
   vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "NONE", ctermbg = "NONE" })
   vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "NONE", ctermbg = "NONE" })
