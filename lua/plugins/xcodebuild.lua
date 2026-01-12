@@ -26,6 +26,12 @@ return {
     },
     config = function()
       require("xcodebuild").setup({
+        -- デバッガー統合（print出力表示用）
+        integrations = {
+          dap = {
+            enabled = true,
+          },
+        },
         -- ログパネルの設定
         logs = {
           auto_open_on_success_build = false,
@@ -37,6 +43,9 @@ return {
           enabled = true,
         },
       })
+
+      -- nvim-dap に lldb-dap を設定
+      require("xcodebuild.integrations.dap").setup()
 
       -- キーマップ
       local keymap = vim.keymap.set
@@ -55,7 +64,10 @@ return {
       keymap("n", "<leader>xC", "<cmd>XcodebuildShowCodeCoverageReport<cr>", { desc = "Coverage Report" })
       keymap("n", "<leader>xq", "<cmd>Telescope quickfix<cr>", { desc = "Quickfix List" })
       keymap("n", "<leader>xx", "<cmd>XcodebuildPicker<cr>", { desc = "Xcodebuild Commands" })
-      keymap("n", "<leader>xo", "<cmd>XcodebuildToggleConsole<cr>", { desc = "Toggle Console (print)" })
+      -- デバッグ用キーマップ
+      keymap("n", "<leader>xD", function()
+        require("xcodebuild.integrations.dap").build_and_debug()
+      end, { desc = "Build & Debug" })
       keymap("n", "<leader>xE", "<cmd>XcodebuildTestExplorerShow<cr>", { desc = "Test Explorer" })
       keymap("n", "<leader>xR", function()
         require("xcodebuild.tests.runner").reload_tests()
