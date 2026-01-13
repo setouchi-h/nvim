@@ -80,7 +80,10 @@ return {
       -- Flutterプロジェクトがあればコマンドを即座に登録
       local project_dir = find_flutter_project()
       if project_dir then
-        require("flutter-tools").setup_project({ cwd = project_dir })
+        require("flutter-tools").setup_project({
+          cwd = project_dir,
+          -- device = "emulator-5554", -- デフォルトデバイスを固定する場合はコメント解除
+        })
       end
 
       -- Telescope拡張を読み込み（エラーハンドリング付き）
