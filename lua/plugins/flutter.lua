@@ -123,4 +123,14 @@ return {
       end
     end,
   },
+
+  -- Dartフォーマッタ (LSP経由)
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        dart = { "lsp" },
+      },
+    },
+  },
 }
