@@ -49,7 +49,7 @@ return {
         },
         dev_log = {
           enabled = true,
-          open_cmd = "tabedit",
+          open_cmd = "botright 15split", -- 画面下に高さ15行で表示
         },
         dev_tools = {
           autostart = false,
