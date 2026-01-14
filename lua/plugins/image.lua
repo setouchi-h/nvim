@@ -3,7 +3,6 @@ return {
   opts = {
     image = {
       enabled = true,
-      -- 画像ファイルを開いた時に自動表示
       doc = {
         enabled = true,
         inline = true,
@@ -13,4 +12,20 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("snacks").setup(opts)
+
+    -- SVGファイルを開いた時に外部ビューアで表示
+    vim.api.nvim_create_autocmd("BufReadCmd", {
+      pattern = "*.svg",
+      callback = function(args)
+        local svg_path = vim.fn.fnamemodify(args.file, ":p")
+        -- Arcで開く
+        vim.fn.system({ "open", "-a", "Arc", svg_path })
+        vim.notify("SVGを外部ビューアで開きました: " .. svg_path, vim.log.levels.INFO)
+        -- 空のバッファを閉じる
+        vim.cmd("bdelete")
+      end,
+    })
+  end,
 }
