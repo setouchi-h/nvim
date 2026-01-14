@@ -1,3 +1,2 @@
-return {
-  { import = "lazyvim.plugins.extras.lang.python" },
-}
+-- Python extras are imported in lua/config/lazy.lua
+return {}
