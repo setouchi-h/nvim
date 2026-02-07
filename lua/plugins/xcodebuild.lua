@@ -33,6 +33,11 @@ return {
       -- nvim-dap に lldb-dap を設定
       require("xcodebuild.integrations.dap").setup()
 
+      -- which-key用のグループ登録
+      require("which-key").add({
+        { "<leader>X", group = "Xcode" },
+      })
+
       -- キーマップ（<leader>X = Xcode）
       local keymap = vim.keymap.set
       keymap("n", "<leader>XS", "<cmd>XcodebuildSetup<cr>", { desc = "Setup Project" })
