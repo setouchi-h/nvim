@@ -4,3 +4,6 @@
 
 -- システムクリップボードと連携
 vim.opt.clipboard = "unnamedplus"
+
+-- ホバー表示までの時間（ミリ秒）
+vim.opt.updatetime = 500

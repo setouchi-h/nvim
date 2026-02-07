@@ -41,6 +41,16 @@ vim.api.nvim_create_autocmd("FocusGained", {
   end,
 })
 
+-- LSP: カーソルが止まったら自動でホバー表示
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    -- LSPがアタッチされている場合のみ
+    if #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
+      vim.lsp.buf.hover()
+    end
+  end,
+})
+
 -- Diffモードでマウススクロール時にscrollbindを同期
 vim.api.nvim_create_autocmd("WinScrolled", {
   group = vim.api.nvim_create_augroup("SyncDiffScroll", { clear = true }),
