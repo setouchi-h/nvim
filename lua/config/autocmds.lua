@@ -44,9 +44,11 @@ vim.api.nvim_create_autocmd("FocusGained", {
 -- LSP: カーソルが止まったら自動でホバー表示
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
-    -- LSPがアタッチされている場合のみ
-    if #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
-      vim.lsp.buf.hover()
+    for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+      if client:supports_method("textDocument/hover") then
+        vim.lsp.buf.hover()
+        return
+      end
     end
   end,
 })
